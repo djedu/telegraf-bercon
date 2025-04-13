@@ -1,4 +1,4 @@
-module github.com/danielnelson/telegraf-execd-plugins
+module github.com/djedu/telegraf-bercon
 
 go 1.23
 
