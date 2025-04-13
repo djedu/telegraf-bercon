@@ -62,14 +62,14 @@ func (s *A2S) Gather(acc telegraf.Accumulator) error {
 			// defer client.Close()
 
 			t := time.Now()
-			response, err := client.Execute("players")
+			response, err := client.Send("players")
 			if err != nil {
 				acc.AddError(err)
 				return
 			}
 
 			// Generate the metric and add it to the accumulator
-			m, err := parseResponse(addr, response, t)
+			m, err := parseResponse(addr, string(response), t)
 			if err != nil {
 				acc.AddError(err)
 				return
