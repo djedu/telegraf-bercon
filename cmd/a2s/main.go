@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gorcon/rcon"
+	"github.com/woozymasta/bercon-cli/pkg/bercon"
 
 	"github.com/influxdata/telegraf"
 	"github.com/influxdata/telegraf/metric"
@@ -45,21 +45,21 @@ func (s *A2S) Gather(acc telegraf.Accumulator) error {
 		go func(addr, passwd string) {
 			defer wg.Done()
 
-			// // Open RCON connection
-			// client, err := bercon.Open(addr, passwd)
-			// if err != nil {
-			// 	acc.AddError(err)
-			// 	return
-			// }
-			// defer client.Close()
-
-			// Connect and send the request
-			client, err := rcon.Dial(addr, passwd)
+			// Open RCON connection
+			client, err := bercon.Open(addr, passwd)
 			if err != nil {
 				acc.AddError(err)
 				return
 			}
 			defer client.Close()
+
+			// // Connect and send the request
+			// client, err := rcon.Dial(addr, passwd)
+			// if err != nil {
+			// 	acc.AddError(err)
+			// 	return
+			// }
+			// defer client.Close()
 
 			t := time.Now()
 			response, err := client.Execute("players")
