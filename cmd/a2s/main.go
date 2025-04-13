@@ -149,15 +149,7 @@ func parseResponse(addr, response string, t time.Time) (telegraf.Metric, error) 
 		"variance_ms":    msVar,
 		"tick_ms":        tick,
 	}
-	m, err := metric.New("a2s", tags, fields, t, telegraf.Gauge)
-	if err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (*A2S) Description() string {
-	return "Collects performance metrics from A2S compatible game servers"
+	return metric.New("a2s", tags, fields, t, telegraf.Gauge), nil
 }
 
 func init() {
